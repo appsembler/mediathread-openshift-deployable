@@ -16,8 +16,16 @@ pip install -r ${OPENSHIFT_REPO_DIR}requirements.openshift.txt --log /tmp/pip.lo
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}mediathread/manage.py syncdb --noinput'"
 python "$OPENSHIFT_REPO_DIR"mediathread/manage.py syncdb --noinput --settings=$DJANGO_SETTINGS
 
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}mediathread/manage.py migrate'"
+python "$OPENSHIFT_REPO_DIR"mediathread/manage.py migrate --settings=$DJANGO_SETTINGS
+
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}mediathread/manage.py migrate_supported_archives'"
+python "$OPENSHIFT_REPO_DIR"mediathread/manage.py migrate_supported_archives --settings=$DJANGO_SETTINGS
+
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}mediathread/manage.py make_admin'"
 python "$OPENSHIFT_REPO_DIR"mediathread/manage.py make_admin --settings=$DJANGO_SETTINGS
 
 #echo "Executing 'python ${OPENSHIFT_REPO_DIR}mediathread/manage.py collectstatic --noinput -v0'"
 #python "$OPENSHIFT_REPO_DIR"mediathread/manage.py collectstatic --noinput -v0 --settings=$DJANGO_SETTINGS
+
+
